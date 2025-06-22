@@ -4,6 +4,7 @@ import authRoutes from "./auth.route.js";
 import categoryRoute from "./category.route.js";
 import saleRoute from "./sale.route.js";
 import productRoute from "./product.route.js";
+import reportRoute from "./report.route.js";
 import auth from "../middlewares/auth.js";
 import authorize from "../middlewares/authorize.js";
 import { permissions } from "../config/permissions.js";
@@ -19,6 +20,7 @@ router.use(
   categoryRoute
 );
 router.use("/products", auth, productRoute);
-router.use("/sale", auth, saleRoute);
+router.use("/sales", auth, saleRoute);
+router.use("/reports", auth, authorize(permissions.view_sales), reportRoute);
 
 export default router;
