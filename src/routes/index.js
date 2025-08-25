@@ -13,12 +13,7 @@ const router = Router();
 
 router.use("/users", auth, authorize(permissions.manage_users), userRoutes);
 router.use("/auth", authRoutes);
-router.use(
-  "/categories",
-  auth,
-  authorize(permissions.manage_categories),
-  categoryRoute
-);
+router.use("/categories", auth, categoryRoute);
 router.use("/products", auth, productRoute);
 router.use("/sales", auth, saleRoute);
 router.use("/reports", auth, authorize(permissions.view_sales), reportRoute);
