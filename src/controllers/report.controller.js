@@ -7,7 +7,7 @@ export const getReports = async (req, res) => {
     const reports = await Sale.find({
       createdAt: {
         $gte: new Date(from),
-        $lt: new Date(to),
+        $lte: new Date(to),
       },
     });
 
@@ -17,7 +17,7 @@ export const getReports = async (req, res) => {
         const itemPrice = item.quantity * item.productUnitPrice;
         totalPrice += itemPrice;
       });
-      return { ...report, totalPrice };
+      return { ...report.toObject(), totalPrice };
     });
 
     res.status(200).json(reportsWithTotal);
